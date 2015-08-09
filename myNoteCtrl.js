@@ -1,4 +1,5 @@
-app.controller("myNoteCtrl", function($scope,$http) {
+app.controller("myNoteCtrl", ['$scope','$http', '$anchorScroll',
+        function($scope,$http, $anchorScroll) {
     $scope.message = "";
     $scope.left  = function() {return 100 - $scope.message.length;};
     $scope.clear = function() {
@@ -40,7 +41,9 @@ app.controller("myNoteCtrl", function($scope,$http) {
     $scope.save  = function()
     {
         if ($scope.user_form.$valid) {
-
+        if($scope.id == undefined){
+            var idd = '';
+        }
         $http({
             method: 'POST',
             url: 'check.php',
@@ -56,7 +59,7 @@ app.controller("myNoteCtrl", function($scope,$http) {
                 UserName: $scope.UserName,
                 Password: $scope.Password,
                 path: $scope.path,
-                id: $scope.id
+                id: idd
             },
             transformRequest: function (data, headersGetter) {
                 var formData = new FormData();
@@ -131,6 +134,7 @@ app.controller("myNoteCtrl", function($scope,$http) {
                 $scope.path = data.resp[key]['profileoic'];
 
             }
+            $anchorScroll();
 
         });
 
@@ -139,8 +143,7 @@ app.controller("myNoteCtrl", function($scope,$http) {
     };
 
 
-
-});
+}]);
 
 
 

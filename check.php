@@ -19,7 +19,7 @@ if ( !empty( $_FILES ) ) {
     @$Password = $_POST['Password'];
     @$profileimage = $_POST['profileimage'];
 
-    if(isset($_POST['id']))
+    if(isset($_POST['id']) && !empty($_POST['id']))
     {
 
         @$id = $_POST['id'];
