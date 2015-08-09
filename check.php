@@ -3,7 +3,6 @@
 include 'connection.php';
 /*This page for file upload and insert,update profile information*/
 if ( !empty( $_FILES ) ) {
-    print_r($_FILES);exit;
     $tempPath = $_FILES['upload']['tmp_name'];
     $uploadPath = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'fileUpload'. DIRECTORY_SEPARATOR . $_FILES[ 'upload' ][ 'name' ];
     if(move_uploaded_file( $tempPath, $uploadPath ))
@@ -20,12 +19,16 @@ if ( !empty( $_FILES ) ) {
     @$Password = $_POST['Password'];
     @$profileimage = $_POST['profileimage'];
 
-    if(isset($request->id))
+    if(isset($_POST['id']))
     {
 
         @$id = $_POST['id'];
-
-        $result = mysql_query("UPDATE profile set name='$name', email='$Email', address='$Address', username='$UserName', password='$Password', profileoic='".$_FILES['upload']['name']."' WHERE user_id='$id'")
+        if(!empty($_FILES)){
+            $filename = 'http://'.$_SERVER['HTTP_HOST'].'/myapp/fileUpload/'.$_FILES['upload']['name'];
+        } else {
+            $filename = $_POST['path'];
+        }
+        $result = mysql_query("UPDATE profile set name='$name', email='$Email', address='$Address', username='$UserName', password='$Password', profileoic='".$filename."' WHERE user_id='$id'")
         or die(mysql_error());
         $answer = array( 'answer' => 'Information Updated...' );
         $json = json_encode( $answer );
@@ -33,7 +36,7 @@ if ( !empty( $_FILES ) ) {
     else
     {
         if(!empty($_FILES)){
-            $filename = $_FILES['upload']['name'];
+            $filename = 'http://'.$_SERVER['HTTP_HOST'].'/myapp/fileUpload/'.$_FILES['upload']['name'];
         } else {
             $filename = $_POST['path'];
         }

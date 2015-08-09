@@ -118,7 +118,7 @@ app.controller("myNoteCtrl", function($scope,$http) {
 
             for (var key in data.resp) {
                 //alert(data);
-                var path = 'http://localhost/myapp/fileUpload/';
+                //var path = 'http://localhost/myapp/fileUpload/';
                 console.log(data.resp[key]['name']);
                 var obj = data.resp[key];
                 $scope.Name = data.resp[key]['name'];
@@ -128,7 +128,7 @@ app.controller("myNoteCtrl", function($scope,$http) {
                 $scope.Password = data.resp[key]['password'];
                 $scope.profileimage = data.resp[key]['profileoic'];
                 $scope.id = data.resp[key]['user_id'];
-                $scope.path = path + data.resp[key]['profileoic'];
+                $scope.path = data.resp[key]['profileoic'];
 
             }
 
