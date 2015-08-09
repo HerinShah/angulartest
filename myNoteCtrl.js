@@ -1,6 +1,7 @@
 app.controller("myNoteCtrl", ['$scope','$http', '$anchorScroll',
         function($scope,$http, $anchorScroll) {
     $scope.message = "";
+    $scope.id = 0;
     $scope.left  = function() {return 100 - $scope.message.length;};
     $scope.clear = function() {
         $scope.Name = "";
@@ -8,7 +9,8 @@ app.controller("myNoteCtrl", ['$scope','$http', '$anchorScroll',
         $scope.Address= "";
         $scope.UserName= "";
         $scope.Password= "";
-
+        $scope.id = 0;
+        $scope.path = "";
     };
 
     /*By default generated first random user*/
@@ -19,6 +21,7 @@ app.controller("myNoteCtrl", ['$scope','$http', '$anchorScroll',
         $scope.UserName= data.results[0].user.username;
         $scope.Password= data.results[0].user.password;
         $scope.path= data.results[0].user.picture.medium;
+        $scope.id = 0;
     });
 
 
@@ -32,6 +35,7 @@ app.controller("myNoteCtrl", ['$scope','$http', '$anchorScroll',
             $scope.UserName= data.results[0].user.username;
             $scope.Password= data.results[0].user.password;
             $scope.path= data.results[0].user.picture.medium;
+            $scope.id = 0;
         });
     };
 
@@ -40,9 +44,12 @@ app.controller("myNoteCtrl", ['$scope','$http', '$anchorScroll',
 
     $scope.save  = function()
     {
+        var idd = 0;
         if ($scope.user_form.$valid) {
-        if($scope.id == undefined){
-            var idd = '';
+        if($scope.id == 0){
+            idd = '';
+        } else {
+            idd = $scope.id;
         }
         $http({
             method: 'POST',
@@ -80,6 +87,7 @@ app.controller("myNoteCtrl", ['$scope','$http', '$anchorScroll',
                     $scope.Address= "";
                 $scope.UserName= "";
                 $scope.Password= "";
+                $scope.id = 0;
                 $scope.path="";
                 alert(data.answer);
                 $http.get("profileinfo.php")

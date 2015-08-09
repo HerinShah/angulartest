@@ -24,7 +24,7 @@ if ( !empty( $_FILES ) ) {
 
         @$id = $_POST['id'];
         if(!empty($_FILES)){
-            $filename = 'http://'.$_SERVER['HTTP_HOST'].'/myapp/fileUpload/'.$_FILES['upload']['name'];
+            $filename = 'http://'.$_SERVER['HTTP_HOST'].'/fileUpload/'.$_FILES['upload']['name'];
         } else {
             $filename = $_POST['path'];
         }
@@ -36,7 +36,7 @@ if ( !empty( $_FILES ) ) {
     else
     {
         if(!empty($_FILES)){
-            $filename = 'http://'.$_SERVER['HTTP_HOST'].'/myapp/fileUpload/'.$_FILES['upload']['name'];
+            $filename = 'http://'.$_SERVER['HTTP_HOST'].'/fileUpload/'.$_FILES['upload']['name'];
         } else {
             $filename = $_POST['path'];
         }
