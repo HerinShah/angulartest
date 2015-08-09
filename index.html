@@ -1,0 +1,93 @@
+<!--
+This page for create , display and edit the profile information
+
+-->
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body ng-app="myNoteApp" ng-controller="myNoteCtrl">
+<div class="container">
+    <h3>My Profile</h3>
+    <form id="user_form" name="user_form">
+        <table class="table table-striped" class="form-group" ng-form name="myForm">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <td> <input type="text" ng-model="Name" name="myinput" required="required" placeholder="Please Enter Name">
+
+                </td>
+
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="email" ng-model="Email" required placeholder="Please Enter Email">
+
+                </td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td> <input type="text" ng-model="Address" required placeholder="Please Enter Address"></td>
+            </tr>
+            <tr>
+                <th>UserName</th>
+                <td> <input type="text" ng-model="UserName" required placeholder="Please Enter User Name"></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td> <input type="password" ng-model="Password" required placeholder="Please Enter Password"></td>
+            </tr>
+            <tr>
+                <th>Profile image</th>
+                <td><input type="file" file="file" />
+
+                    <img ng-src="{{ path }}"  height="50px" width="50px" /></span></td>
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="6"><button ng-click="random()" class="btn btn-success">Generate Random User</button>
+                    <button ng-click="save()"   class="btn btn-success">Save</button>
+                    <button ng-click="clear()" class="btn btn-success">Clear</button>
+                    <button ng-click="view()" class="btn btn-success">View Profiles</button></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </form >
+
+
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Edit</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>User Name</th>
+            <th>Password</th>
+            <th>ProfilePic</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in info">
+            <td>
+                <a class="btn btn-success" ng-click="Edit(x.user_id)">Edit</a>
+            </td>
+            <td>{{ x.name }}</td>
+            <td>{{ x.email }}</td>
+            <td>{{ x.address }}</td>
+            <td>{{ x.username }}</td>
+            <td>{{ x.password }}</td>
+            <td><img ng-src="{{x.profileoic}}" height="50px" width="50px"/><td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script src="myNoteApp.js"></script>
+    <script src="myNoteCtrl.js"></script>
+    <div class="container">
+</body>
+</html>
